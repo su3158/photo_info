@@ -16,7 +16,7 @@ PARAM_LIST = [
 ]
 
 
-def getPath():
+def getParm():
     parser = argparse.ArgumentParser(
         description='Displays information embedded in the photo')
     parser.add_argument('path', type=str, help="Image Paths")
@@ -29,12 +29,6 @@ def getPath():
 def analysis(path):
     with pyexiv2.Image(path) as img:
         data = img.read_exif()
-        # print(type(data))
-        # pprint.pprint(data)
-        # 高度の計算
-        # h = data['Exif.GPSInfo.GPSAltitude']
-        # print(h)
-        # h = 左割る右
 
         info_list = list()
         for param in PARAM_LIST:
@@ -45,13 +39,10 @@ def analysis(path):
 
 
 def main():
-    path = getPath()
+    path = getParm()
     console.echo(path[0])
     info_list = analysis(path[0])
-    print(info_list)
     console.table(info_list)
-    # console.test()
-    # console.test_table()
     return 0
 
 
